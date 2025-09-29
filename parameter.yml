@@ -1,0 +1,63 @@
+find_replace:
+
+  - find_value: "6fcdad2a-c36a-402c-9dd0-377b7185fed0"  
+    replace_value:
+      dev: "6fcdad2a-c36a-402c-9dd0-377b7185fed0"     
+      prod: "863d7c89-b5db-43bc-875c-539ff9b0732c"    
+    item_type: "Notebook"
+    file_path:
+      - "01_bronze/01_raw/01_notebooks/nb_raw.Notebook/notebook-content.py"
+  - find_value: "0a5fb398-2e12-40a7-9622-0d4ed04d4a84"  
+    replace_value:
+      dev: "0a5fb398-2e12-40a7-9622-0d4ed04d4a84"       
+      prod: "3ee8c141-330a-45c0-aa00-face7aa75343"      
+    item_type: "Notebook"
+    file_path:
+      - "01_bronze/02_stg/01_notebooks/nb_stg.Notebook/notebook-content.py"
+
+key_value_replace:
+
+  - find_key: $.properties.activities[*].typeProperties.sink.datasetSettings.typeProperties.artifactId
+    replace_value:
+      dev: "0a5fb398-2e12-40a7-9622-0d4ed04d4a84"        
+      prod: "3ee8c141-330a-45c0-aa00-face7aa75343"     
+    item_type: "DataPipeline"
+    item_name: "pl_stg"
+    file_path:
+      - "01_bronze/02_stg/02_pipelines/pl_stg.DataPipeline/pipeline-content.json"
+
+  - find_key: $.properties.activities[*].typeProperties.sink.datasetSettings.typeProperties.artifactId
+    replace_value:
+      dev: "b0921385-696e-471d-83c5-726343d53a2b"      
+      prod: "0a471ec1-4810-409d-8cae-754c0c1258a5" 
+    item_type: "DataPipeline"
+    item_name: "pl_core"
+    file_path:
+      - "02_silver/01_core/02_pipelines/pl_core.DataPipeline/pipeline-content.json"
+
+  - find_key: $.properties.activities[*].typeProperties.pipeline.referenceName
+    replace_value:
+      dev: "pl_orchestration_child_dev"    
+      prod: "pl_orchestration_child_prod"  
+    item_type: "DataPipeline"
+    item_name: "pl_orchestration_master"
+    file_path:
+      - "06_pipeline_orchestration/01_master_orchestration/pl_orchestration_master.DataPipeline/pipeline-content.json"
+
+  - find_key: $.artifactId
+    replace_value:
+      dev: "6fcdad2a-c36a-402c-9dd0-377b7185fed0"    
+      prod: "863d7c89-b5db-43bc-875c-539ff9b0732c"  
+    item_type: "Lakehouse"
+    item_name: "lh_raw"
+    file_path:
+      - "01_bronze/01_raw/03_lakehouse/lh_raw.Lakehouse/lakehouse.metadata.json"
+
+  - find_key: $.artifactId
+    replace_value:
+      dev: "0a5fb398-2e12-40a7-9622-0d4ed04d4a84"   
+      prod: "3ee8c141-330a-45c0-aa00-face7aa75343"  
+    item_type: "Lakehouse"
+    item_name: "lh_stg"
+    file_path:
+      - "01_bronze/02_stg/03_lakehouse/lh_stg.Lakehouse/lakehouse.metadata.json"
